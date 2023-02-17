@@ -3,9 +3,11 @@
 document.getElementById('btn-mobile-plus').addEventListener('click', function () {
     const newMobileNumber = updateMobileNumber(true);
     updateMobileTotalPrice(newMobileNumber);
+    calculateSubTotal();
 });
 // task: minus button work for button-mobile-minus
 document.getElementById('btn-mobile-minus').addEventListener('click', function () {
     const newMobileNumber = updateMobileNumber(false);
      updateMobileTotalPrice(newMobileNumber);
+     calculateSubTotal();
 });

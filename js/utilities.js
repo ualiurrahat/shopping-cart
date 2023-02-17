@@ -8,7 +8,7 @@ function updateCaseNumber(isIncrease) {
     const previousCaseNumber = parseInt(caseNumberString);
     // calculate new case number
     let newCaseNumber;
-    if (isIncrease) {
+    if (isIncrease === true) {
         newCaseNumber = previousCaseNumber + 1;
     }
     else {
@@ -34,7 +34,7 @@ function updateMobileNumber(isIncrease) {
     const previousMobileNumber = parseInt(mobileNumberString);
     // calculate new case number
     let newMobileNumber;
-    if (isIncrease) {
+    if (isIncrease === true) {
         newMobileNumber = previousMobileNumber + 1;
     }
     else {
@@ -50,4 +50,38 @@ function updateMobileTotalPrice(newMobileNumber)
     const mobileTotalPriceElement = document.getElementById('mobile-total-price');
     const newMobileTotalPrice = newMobileNumber*1219;
     mobileTotalPriceElement.innerText = newMobileTotalPrice;
+}
+// function to get value as numbers from an element
+function getElementValueById(elementId)
+{
+    const elementField = document.getElementById(elementId);
+    const elementValueString = elementField.innerText;
+    const elementValue = parseInt(elementValueString);
+    return elementValue;
+}
+// function to set value as numbers of an element
+function setElementValueById(elementId, newValue)
+{
+    const element = document.getElementById(elementId);
+    element.innerText = newValue;
+}
+// function to calculate total amount: subtotal,tax,final-total
+function   calculateSubTotal()
+{
+    const mobileTotalPrice = getElementValueById('mobile-total-price');
+    const caseTotalPrice = getElementValueById('case-total-price');
+
+    const subTotalPrice = mobileTotalPrice+caseTotalPrice;
+    // set the total price to sub-total
+    setElementValueById('sub-total', subTotalPrice);
+    // calculate tax: as 12% of the bill
+    const taxPriceString = (subTotalPrice*0.12).toFixed(2);
+    const taxPrice = parseFloat(taxPriceString);
+    // set tax price
+    setElementValueById('tax-total', taxPrice);
+
+    // set final price
+    const finalPrice = subTotalPrice + taxPrice;
+    // set final price
+    setElementValueById('final-total', finalPrice);
 }
